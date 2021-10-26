@@ -23,7 +23,19 @@ public class Rational
     // *****
 
 
-
+    public static int greatestCommonFactor(int a, int b){
+        int x = Math.max(a,b);
+        int y=x;
+        int ans = 0;
+        while (y>0){
+            if (a%y==0 && b%y==0){
+                ans=y;
+                y=0;
+            }else{
+                y=y-1;
+            }
+        }return ans;
+    }
 
 
 
@@ -53,7 +65,11 @@ public class Rational
     // Rational r = new Rational(6,12);
     // System.out.println(r.isSimplified()) // false
     public boolean isSimplified() {
-        return false; // YOUR CODE HERE
+        int x =this.greatestCommonFactor(this.numerator,this.denominator);
+        if(x==1){
+            return false;
+        }
+        return true;
     }
 
     // Calculates the double value of our Rational
@@ -61,7 +77,8 @@ public class Rational
     // Rational r = new Rational(3,4);
     // System.out.println(r.calculateDecimalValue()) // 0.75
     public double calculateDecimalValue() {
-        return 0.0; // YOUR CODE HERE
+        double u = this.numerator/this.denominator;
+        return u;
     }
 
     // Returns the Rational we get from raising the rational number to an integer power
@@ -69,7 +86,16 @@ public class Rational
     // Rational r = new Rational(2,5);
     // System.out.println(r.pow(2)) // 4/25
     public Rational pow(int exponent) {
-        return null; // YOUR CODE HERE
+        int x=0;
+        int y= 0;
+        int a=0;
+        this.numerator=y;
+        this.denominator= a;
+        while(x<exponent){
+            this.numerator=this.numerator*y;
+            this.numerator=this.denominator*a;
+        }
+        return this;
     }
 
     // Checks to see if either the numerator or denominator match a given number
@@ -135,7 +161,7 @@ public class Rational
     // Rational r = new Rational(3, 5);
     // r.increment(); // r is now 8/5
     public void increment() {
-        // YOUR CODE HERE
+        this.numerator= this.numerator+this.denominator;
     }
 
     // Decrements the current value of our Rational (decreases the value
@@ -144,7 +170,7 @@ public class Rational
     // Rational r = new Rational(6, 5);
     // r.decrement(); // r is now 1/5
     public void decrement() {
-        // YOUR CODE HERE
+       this.numerator-=this.denominator;
     }
 
     // Given an int input representing the new denominator, changes the
@@ -153,7 +179,9 @@ public class Rational
     // Rational r = new Rational(3, 8);
     // r.changeToEquivalentFraction(64); // r is now 24/64 (which is equivalent to 3/8)
     public void changeToEquivalentFraction(int newDenominator) {
-        // YOUR CODE HERE
+        int change = this.denominator/newDenominator;
+        this.numerator/=change;
+        this.denominator=newDenominator;
     }
 
     // **********
@@ -164,7 +192,7 @@ public class Rational
     // Rational r = new Rational(-3,4);
     // System.out.println(r.isNegative()) // true
     public boolean isNegative() { 
-        return false; // YOUR CODE HERE
+        return(this.denominator*this.numerator<0);
     }
 
     // Calculates the reciprocal of a Rational number.
@@ -173,7 +201,11 @@ public class Rational
     // Rational r = new Rational(5,2);
     // System.out.println(r.reciprocal()) // 2/5
     public Rational reciprocal() {
-        return null; // YOUR CODE HERE
+        int x=0;
+        x=this.numerator;
+        this.numerator=this.denominator;
+        this.denominator=x;
+        return this;
     }
 
     // Checks whether the current Rational is the exactly the same as other
@@ -182,7 +214,7 @@ public class Rational
     // Rational s = new Rational(2,4);
     // System.out.println(r.equals(s)) // false
     public boolean equals(Rational other) {
-        return false; // YOUR CODE HERE
+        return(this.denominator== other.denominator&& this.numerator== other.numerator);
     }
 
     // Rounds the current Rational to the nearest whole number value
@@ -190,9 +222,17 @@ public class Rational
     // Rational r = new Rational(3, 2);
     // r.round(); // r is now 2/1
     public void round() {
-        // YOUR CODE HERE
-    }
-}
+        double val = this.numerator/this.denominator;
+        int x = (int)  val;
+        double check = val - x;
+        if(check>=0.5){
+             x=x+1;
+        }else{
+            x= x;}
+        this.numerator=x;
+        this.denominator=1;
+
+}}
 
 
 
